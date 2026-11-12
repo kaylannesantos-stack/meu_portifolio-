@@ -1,101 +1,157 @@
+/* ==========================================
+   VARIÁVEIS DE CORES E ESTILOS
+   ========================================== */
 :root {
-	color-scheme: dark;
-	--blue-deep: #071b36;
-	--blue: #0b3970;
-	--blue-bright: #43b9ff;
-	--white: #f5faff;
-	--white-muted: #c7d9ec;
+	/* Azul extraído da imagem de referência (#20324d) */
+	--bg-blue: #20324d;
+	--bg-card: rgba(255, 255, 255, 0.07);
+	
+	/* Tipografia 100% Branca / Clara */
+	--text-white: #ffffff;
+	--text-muted: #d1dce8;
+	
+	/* Cores de Destaque */
+	--accent-blue: #38bdf8;
+	--border-color: rgba(255, 255, 255, 0.15);
 }
 
+/* ==========================================
+   RESET & BASE GLOBAL
+   ========================================== */
 * {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
 body {
+	width: 100%;
 	min-height: 100vh;
 	margin: 0;
-	display: grid;
-	place-items: center;
-	padding: 48px 24px;
-	color: var(--white);
-	background-color: var(--blue-deep);
-	background-image: url("assets/azul_noite.png");
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	font-family: "Trebuchet MS", "Verdana", sans-serif;
+	background-color: var(--bg-blue);
+	color: var(--text-white);
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	line-height: 1.6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
+/* Container de Conteúdo Principal */
 main {
-	width: min(100%, 820px);
-	padding: 64px 68px;
-	border: 1px solid rgba(199, 217, 236, 0.22);
-	border-left: 4px solid var(--blue-bright);
-	background: rgba(5, 23, 47, 0.72);
-	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
-	animation: arrive 700ms ease-out both;
+	width: min(90%, 860px);
+	margin: 30px auto 60px;
+	padding: 48px;
+	background: var(--bg-card);
+	border: 1px solid var(--border-color);
+	border-radius: 16px;
+	backdrop-filter: blur(8px);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
+/* ==========================================
+   MENU DE NAVEGAÇÃO (.meu-navegador)
+   ========================================== */
+.meu-navegador {
+	width: min(90%, 860px);
+	margin: 24px auto 0;
+	padding: 14px 28px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2.5rem; /* Espaçamento bem distribuído entre os links */
+	background: rgba(21, 35, 54, 0.85);
+	border: 1px solid var(--border-color);
+	border-radius: 50px;
+	backdrop-filter: blur(12px);
+}
+
+.meu-navegador a {
+	position: relative;
+	color: var(--text-muted);
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 0.95rem;
+	padding: 6px 0;
+	transition: color 0.2s ease;
+}
+
+.meu-navegador a:hover {
+	color: var(--text-white);
+}
+
+/* Efeito moderno de linha azul ao passar o mouse */
+.meu-navegador a::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: -2px;
+	width: 0%;
+	height: 2px;
+	background-color: var(--accent-blue);
+	transition: width 0.3s ease;
+	border-radius: 2px;
+}
+
+.meu-navegador a:hover::after {
+	width: 100%;
+}
+
+/* ==========================================
+   ELEMENTOS DE CONTEÚDO (H1, H3, Imagens)
+   ========================================== */
 h1 {
-	margin: 0 0 28px;
-	color: var(--white);
-	font-size: 3rem;
-	line-height: 1.1;
-}
-
-h1::after {
-	display: block;
-	width: 64px;
-	height: 4px;
-	margin-top: 20px;
-	background: var(--blue-bright);
-	content: "";
+	color: var(--text-white);
+	font-size: 2.25rem;
+	margin-bottom: 20px;
+	letter-spacing: -0.02em;
 }
 
 h3 {
-	margin: 0;
-	color: var(--white-muted);
-	font-size: 1.2rem;
+	color: var(--text-muted);
+	font-size: 1.1rem;
 	font-weight: 400;
-	line-height: 1.85;
+	line-height: 1.8;
 }
 
-@keyframes arrive {
-	from {
-		opacity: 0;
-		transform: translateY(14px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
+/* Estilo para a foto de perfil na página inicial */
+main > img {
+	max-width: 180px;
+	height: auto;
+	border-radius: 12px;
+	margin-bottom: 24px;
+	object-fit: cover;
+	border: 2px solid var(--border-color);
 }
 
-@media (max-width: 600px) {
-	body {
-		padding: 24px 16px;
+/* Ajuste específico para os ícones de linguagens (Python, HTML, etc) */
+main h3 img {
+	width: 32px;
+	height: 32px;
+	vertical-align: middle;
+	margin-left: 8px;
+	border-radius: 4px;
+	border: none;
+}
+
+/* ==========================================
+   RESPONSIVIDADE (Celulares / Dispositivos Móveis)
+   ========================================== */
+@media (max-width: 650px) {
+	.meu-navegador {
+		flex-wrap: wrap;
+		gap: 1rem;
+		border-radius: 16px;
+		padding: 16px;
 	}
 
 	main {
-		padding: 40px 28px;
+		padding: 24px;
+		margin: 20px auto;
 	}
 
 	h1 {
-		font-size: 2.25rem;
-	}
-
-	h3 {
-		font-size: 1.05rem;
+		font-size: 1.75rem;
 	}
 }
 
-@media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		scroll-behavior: auto !important;
-	}
-}
